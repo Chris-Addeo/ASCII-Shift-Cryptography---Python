@@ -1,0 +1,119 @@
+''' - The Functions (Modified) - '''
+#Shift Up / Down
+def ascii_shift(shift):
+    global string
+    new_string = []
+    for i in string:
+        if i.isalpha():
+            new_string.append(chr(ord(i)+shift))
+        elif i == ' ' or i == ',':
+            new_string.append(i)
+    results = ''.join(map(str,new_string))
+    if shift == "U":
+        print ("ASCII shifted up:", results)
+    else:
+        print ("ASCII shifted down:", results)
+    string = results
+    return string
+#Shift Right
+def shift_right():
+    global string
+    last = string[-1]
+    sliced = string[0:(len(string)-1)]
+    if last == " ":
+        results = sliced
+        print("Shifted right:", results)
+    else:
+        results = last + sliced
+        print("Shifted right:", results)
+    string == results
+    return string
+#Shift Left
+def shift_left():
+    global string
+    first = string[0]
+    sliced = string[1:(len(string))]
+    if first == " ":
+        results = sliced
+        print("Shifted left:", results)
+    else:
+        results = sliced + first
+        print("Shifted left:", results)
+    string = results
+    return string
+#Flip
+def flip():
+    global string
+    end = len(string)
+    if len(string) % 2 == 0:
+        mid = len(string) // 2
+        half1 = string[0:mid]
+        half2 = string[mid:end]
+        results = half2 + half1
+    else:
+        mid = int(len(string) / 2)
+        middle = string[mid]
+        mid2 = mid + 1
+        half1 = string[0:mid]
+        half2 = string[mid2:end]
+        results = half2 + middle + half1
+    print ("Flipped:", results)
+    string = results
+    return string
+#Add Letters
+def add_letters():
+    global string
+    num = 1
+    import random
+    results = ''
+    for i in string:
+        results += i
+        for x in range(num):
+            r = chr(random.randint(33,126))
+            results += r
+    print ("Added 1 character:", results)
+    string = results
+    return string
+#Delete Characters
+def delete_characters():
+    global string
+    num = 1
+    results = string[0::num+1]
+    print ("Deleted 1 character:", results)
+    string = results
+    return string
+
+#Output Commands
+print("Here are valid commands:")
+print("o 'A' = add 1 character in between all characters")
+print("o 'X' = delete 1 character in between all characters")
+print("o 'F' = flip the string")
+print("o 'U' = ASCII shift all characters by +1")
+print("o 'D' = ASCII shift all characters by -1")
+print("o 'L' = Shift all characters to the left by 1")
+print("o 'R' = Shift all characters to the right by 1")
+print()
+
+#Get info From User
+encoding = input("Enter an encoding pattern, 'end' to end: ")
+if encoding == 'end':
+    print("Goodbye!")
+else:
+    string = input("Enter a word to encode/decode: ")
+    for i in encoding:
+        if i == 'A':
+            add_letters()
+        elif i == 'X':
+            delete_characters()
+        elif i == 'F':
+            flip()
+        elif i == 'U':
+            ascii_shift(1)
+        elif i == 'D':
+            ascii_shift(-1)
+        elif i == 'L':
+            shift_left()
+        elif i == 'R':
+            shift_right()
+        else:
+            continue
